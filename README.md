@@ -1,4 +1,5 @@
 A/: run and test work
+---------------------
 + `python_library()`
 + `pex_binary` no sources, entry_point, explicit dependencies on `python_library`
 
@@ -22,6 +23,7 @@ $ ./pants test path/to/package/test/test_package.py
 ```
 
 B/: run works, test fails
+-------------------------
 + `python_library()`
 + `pex_binary` sources
 
@@ -72,7 +74,8 @@ ERROR path/to/package/test/test_package.py
 𐄂 path/to/package/test/test_package.py failed.
 ```
 
-C/: run fails, test fails 
+C/: run fails, test fails
+-------------------------
 + `pex_binary` sources
 
 ```
@@ -143,6 +146,7 @@ ERROR path/to/package/test/test_package.py
 ```
 
 D/: run works, test fails
+-------------------------
 + `python_library()`
 + `pex_binary` no sources, entry_point, explicit dependencies on `python_library`
 
