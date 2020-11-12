@@ -22,57 +22,13 @@ $ ./pants test path/to/package/test/test_package.py
 ✓ path/to/package/test/test_package.py succeeded.
 ```
 
-B/: run works, test fails
--------------------------
-+ `python_library()`
+B/: run and test work
+---------------------
++ `python_library` sources for all except `pex_binary` sources
 + `pex_binary` sources
-
-Same run success a A.
-
 + `python_tests()`
 
-```
-$ ./pants test path/to/package/test
-16:04:25.19 [WARN] Completed: Run tests - path/to/package/test/test_package.py failed (exit code 2).
-============================= test session starts ==============================
-platform linux -- Python 3.6.12, pytest-6.0.2, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3.6
-cachedir: .pytest_cache
-rootdir: /tmp/process-executionOUo4x5
-plugins: cov-2.10.1
-collecting ... collected 0 items / 1 error
-
-==================================== ERRORS ====================================
-____________ ERROR collecting path/to/package/test/test_package.py _____________
-ImportError while importing test module '/tmp/process-executionOUo4x5/path/to/package/test/test_package.py'.
-Hint: make sure your test modules/packages have valid Python names.
-Traceback:
-/home/jsirois/.cache/pants/named_caches/pex_root/installed_wheels/80c6a3b6446950ab184d83f405467154af4c5277/pytest-6.0.2-py3-none-any.whl/_pytest/python.py:552: in _importtestmodule
-    mod = import_path(self.fspath, mode=importmode)
-/home/jsirois/.cache/pants/named_caches/pex_root/installed_wheels/80c6a3b6446950ab184d83f405467154af4c5277/pytest-6.0.2-py3-none-any.whl/_pytest/pathlib.py:520: in import_path
-    importlib.import_module(module_name)
-/usr/lib/python3.6/importlib/__init__.py:126: in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-<frozen importlib._bootstrap>:994: in _gcd_import
-    ???
-<frozen importlib._bootstrap>:971: in _find_and_load
-    ???
-<frozen importlib._bootstrap>:955: in _find_and_load_unlocked
-    ???
-<frozen importlib._bootstrap>:665: in _load_unlocked
-    ???
-/home/jsirois/.cache/pants/named_caches/pex_root/installed_wheels/80c6a3b6446950ab184d83f405467154af4c5277/pytest-6.0.2-py3-none-any.whl/_pytest/assertion/rewrite.py:170: in exec_module
-    exec(co, module.__dict__)
-path/to/package/test/test_package.py:1: in <module>
-    from package.package import Package
-E   ModuleNotFoundError: No module named 'package'
-=========================== short test summary info ============================
-ERROR path/to/package/test/test_package.py
-!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
-=============================== 1 error in 0.13s ===============================
-
-
-𐄂 path/to/package/test/test_package.py failed.
-```
+Same run and test successes a A.
 
 C/: run fails, test fails
 -------------------------
@@ -177,4 +133,56 @@ If you would like to ignore un-owned files, please pass `--owners-not-found-beha
 
 
 (Use --print-stacktrace to see more error details.)
+```
+
+E/: run works, test fails
+-------------------------
++ `python_library()`
++ `pex_binary` sources
+
+Same run success a A.
+
++ `python_tests()`
+
+```
+$ ./pants test path/to/package/test
+16:04:25.19 [WARN] Completed: Run tests - path/to/package/test/test_package.py failed (exit code 2).
+============================= test session starts ==============================
+platform linux -- Python 3.6.12, pytest-6.0.2, py-1.9.0, pluggy-0.13.1 -- /usr/bin/python3.6
+cachedir: .pytest_cache
+rootdir: /tmp/process-executionOUo4x5
+plugins: cov-2.10.1
+collecting ... collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+____________ ERROR collecting path/to/package/test/test_package.py _____________
+ImportError while importing test module '/tmp/process-executionOUo4x5/path/to/package/test/test_package.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/home/jsirois/.cache/pants/named_caches/pex_root/installed_wheels/80c6a3b6446950ab184d83f405467154af4c5277/pytest-6.0.2-py3-none-any.whl/_pytest/python.py:552: in _importtestmodule
+    mod = import_path(self.fspath, mode=importmode)
+/home/jsirois/.cache/pants/named_caches/pex_root/installed_wheels/80c6a3b6446950ab184d83f405467154af4c5277/pytest-6.0.2-py3-none-any.whl/_pytest/pathlib.py:520: in import_path
+    importlib.import_module(module_name)
+/usr/lib/python3.6/importlib/__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+<frozen importlib._bootstrap>:994: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:971: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:955: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:665: in _load_unlocked
+    ???
+/home/jsirois/.cache/pants/named_caches/pex_root/installed_wheels/80c6a3b6446950ab184d83f405467154af4c5277/pytest-6.0.2-py3-none-any.whl/_pytest/assertion/rewrite.py:170: in exec_module
+    exec(co, module.__dict__)
+path/to/package/test/test_package.py:1: in <module>
+    from package.package import Package
+E   ModuleNotFoundError: No module named 'package'
+=========================== short test summary info ============================
+ERROR path/to/package/test/test_package.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.13s ===============================
+
+
+𐄂 path/to/package/test/test_package.py failed.
 ```
