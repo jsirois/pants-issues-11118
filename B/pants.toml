@@ -1,0 +1,13 @@
+[GLOBAL]
+pants_version = "2.0.0"
+backend_packages = ['pants.backend.python', 'pants.backend.python.lint.black']
+
+[source]
+root_patterns = [
+  "/path/to/package/src",
+  "/path/to/package/test",
+]
+
+[pytest]
+args = ["-vv", "-s"]
+
